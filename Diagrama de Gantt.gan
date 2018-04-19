@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2018-04-14" view-index="0" gantt-divider-location="313" resource-divider-location="300" version="2.8.6" locale="es">
+    <description/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="185" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="70" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="54" order="2"/>
+        <option id="taskLabelUp" value=""/>
+        <option id="taskLabelRight" value="name"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="210" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="49" name="Base de Datos" color="#8cb6ce" meeting="false" start="2018-04-16" duration="3" complete="0" thirdDate="2018-04-16" thirdDate-constraint="0" expand="true">
+            <task id="0" name="Diagrama BBDD" meeting="false" start="2018-04-16" duration="1" complete="0" expand="true">
+                <depend id="2" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="2" name="Creacio BBDD" color="#8cb6ce" meeting="false" start="2018-04-17" duration="2" complete="0" thirdDate="2018-04-13" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="50" name="Pagina Web" meeting="false" start="2018-04-16" duration="15" complete="0" expand="true">
+            <task id="3" name="Creacio de Wireframe" meeting="false" start="2018-04-16" duration="1" complete="0" expand="true">
+                <depend id="22" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="22" name="Disseny Pagina Web" color="#8cb6ce" meeting="false" start="2018-04-17" duration="4" complete="0" thirdDate="2018-04-17" thirdDate-constraint="0" expand="true"/>
+            <task id="137" name="Accessibilitat de la Web" color="#8cb6ce" meeting="false" start="2018-04-17" duration="4" complete="0" thirdDate="2018-04-16" thirdDate-constraint="0" expand="true"/>
+            <task id="27" name="Implementacio Login" color="#8cb6ce" meeting="false" start="2018-04-23" duration="4" complete="0" thirdDate="2018-04-26" thirdDate-constraint="0" expand="true"/>
+            <task id="28" name="Implementacio Cercador" color="#8cb6ce" meeting="false" start="2018-04-23" duration="4" complete="0" thirdDate="2018-04-26" thirdDate-constraint="0" expand="true"/>
+            <task id="64" name="Implementacio Cistell Compres" color="#8cb6ce" meeting="false" start="2018-04-27" duration="2" complete="0" thirdDate="2018-04-27" thirdDate-constraint="0" expand="true"/>
+            <task id="29" name="Implementacio Registre" color="#8cb6ce" meeting="false" start="2018-04-27" duration="2" complete="0" thirdDate="2018-04-26" thirdDate-constraint="0" expand="true">
+                <depend id="136" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="136" name="Pagina Administrador" color="#8cb6ce" meeting="false" start="2018-05-01" duration="4" complete="0" thirdDate="2018-04-16" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="97" name="Seguretat" meeting="false" start="2018-05-07" duration="3" complete="0" expand="true">
+            <task id="99" name="Control Acces Admin/Usuaris" color="#8cb6ce" meeting="false" start="2018-05-07" duration="3" complete="0" thirdDate="2018-05-07" thirdDate-constraint="0" expand="true"/>
+            <task id="70" name="Control d'Intrusions" color="#8cb6ce" meeting="false" start="2018-05-08" duration="1" complete="0" thirdDate="2018-04-16" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="69" name="Test" meeting="false" start="2018-05-10" duration="3" complete="0" expand="true">
+            <task id="127" name="Proves a la nostra aplicacio" color="#8cb6ce" meeting="false" start="2018-05-10" duration="3" complete="0" thirdDate="2018-05-08" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="142" name="Documentacio" meeting="false" start="2018-05-15" duration="6" complete="0" expand="true">
+            <task id="155" name="Creacio de la Documentacio" meeting="false" start="2018-05-15" duration="4" complete="0" expand="true"/>
+            <task id="157" name="Creacio de la Presentacio" meeting="false" start="2018-05-21" duration="2" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
