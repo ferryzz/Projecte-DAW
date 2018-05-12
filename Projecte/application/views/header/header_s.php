@@ -88,11 +88,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			  
 			   <div class="col-sm-3 col-md-3">
-				<form class="navbar-form" role="search">
+				<!--<form class="navbar-form" role="search">-->
+				<h1><?php echo validation_errors(); ?></h1>
+				<?php echo form_open('Welcome/verProductos');?>
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="cerca">
+					<input type="text" class="form-control" placeholder="Search" name="buscar">
 					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+						<input name="enviar" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 					</div>
 				</div>
 				</form>
