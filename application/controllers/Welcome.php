@@ -119,4 +119,14 @@ class Welcome extends CI_Controller {
       
     }
 
+    public function pago ()
+    {
+    	$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('pago/prepago');
+		$this->load->view('footer/footer_s'); 
+     }
+      
+
+
 }

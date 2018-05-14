@@ -21,7 +21,7 @@
 					<tbody>
 						<tr>
 							<td><?php echo "<a href='http://localhost/projecte/index.php/producto/".$row->id."''>" .$row->nombre."</a>";?></td>
-							<td><?php echo $cantidades[$i]; $semitotal=$cantidades[$i]; echo"<a href='http://localhost/projecte/index.php/welcome/borrarproducto/".$row->id."/1'>     Quitar</a>"?></td>
+							<td><?php echo"<a href='http://localhost/projecte/index.php/welcome/borrarproducto/".$row->id."/1'><span class='glyphicon glyphicon-minus'>&nbsp &nbsp</span></a>"; echo $cantidades[$i]; $semitotal=$cantidades[$i]; echo"&nbsp &nbsp"; echo"<a href='http://localhost/projecte/index.php/welcome/addproduct/".$row->id."/1'><span class='glyphicon glyphicon-plus'></span></a>";?></td>
 							<td><?php $disponible=Date('d/m/y', strtotime("+10 days"));  if ($row->stock < $cantidades[$i]) {
 								echo "Disponible a partir del ".$disponible." (*)";;
 							}else{ echo "Disponible";}  ?></td>
