@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-04-2018 a las 16:01:52
--- Versión del servidor: 10.1.16-MariaDB
--- Versión de PHP: 5.6.24
+-- Tiempo de generación: 12-05-2018 a las 17:15:47
+-- Versión del servidor: 10.1.26-MariaDB
+-- Versión de PHP: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -177,39 +179,39 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `categoria_id`, `imagen`) VALUES
-(1, 'L-Link Fuente de Alimentación 650W PFC', 22, 1, 'fuente1.jpg'),
-(2, 'Tacens APII500 Fuente Alimentación 500W', 13, 1, 'fuente2.jpg'),
-(3, 'MSI Z370 Gaming Plus', 140, 2, 'placa1.jpg'),
-(4, 'Gigabyte Z370P D3', 89, 2, 'placa2.jpg\r\n'),
-(5, 'Crucial DDR4 2133 PC4-17000 8GB CL15', 75, 3, 'ram1.jpg'),
-(6, 'Intel Core i7-8700K 3.7Ghz BOX', 319, 4, 'procesador1.jpg'),
-(7, 'Intel Core i3-8100 3.6GHz BOX', 100, 4, 'procesador2.jpg'),
-(8, 'Seagate BarraCuda 3.5" 1TB SATA3', 45, 5, 'discoduro1.jpg'),
-(9, 'Samsung 850 Evo SSD Series 250GB SATA3', 85, 5, 'discoduro2.jpg'),
-(10, 'Asus Dual GTX 1060 OC 6GB GDDR5', 379, 6, 'gpu1.jpg'),
-(11, 'MSI GeForce GTX 1070 Ti GAMING 8 GB GDDR5', 592, 6, 'gpu2.jpg'),
-(12, 'HP Pavilion Desktop 570-P066NS AMD A10-9700/12GB/1TB/RX 460', 600, 7, 'sobremesa1.jpg'),
-(13, 'HP OMEN 880-127NS Intel Core i7-8700/16GB/1TB+128GB SSD/GTX 1060', 1120, 7, 'sobremesa2.jpg'),
-(14, 'HP Notebook 250 G6 Intel Core i5-7200U/8GB/256GB SSD/15.6"', 595, 8, 'portatil1.jpg'),
-(15, 'Portátil Lenovo IdeaPad 320-15AST AMD A4-9120/8GB/1TB/15.6"', 419, 8, 'portatil2.jpg'),
-(16, 'Logitech Keyboard K120', 14, 9, 'keyboard1.jpg'),
-(17, 'Newskill Hanshi Spectrum Teclado Mecánico RGB Kailh Brown', 100, 9, 'keyboard2.jpg'),
-(18, 'HP 200 Ratón Inalámbrico 1000DPI', 10, 12, 'raton1.jpg'),
-(19, 'Razer DeathAdder Elite Ratón Gaming 16000 DPI Negro', 75, 10, 'raton2.jpg'),
-(20, 'Samsung S24D330H 24" LED', 135, 11, 'monitor1.jpg'),
-(21, 'MSI Optix G24C 24" FullHD Curvo', 255, 11, 'monitor2.jpg'),
-(22, 'Logitech G430 Gaming Surround Sound 7.1', 75, 12, 'auriculares2.jpg'),
-(23, 'SuperLux HD 668B', 30, 12, 'auriculares2.jpg'),
-(24, 'Cable USB 3.0 Alargador Macho/Hembra 1m', 5, 13, 'usb1.jpg'),
-(25, 'Nanocable Cable USB Tipo A a Tipo B Negro para Impresora', 1, 13, 'usb2.jpg'),
-(26, 'Owlotech Cable HDMI 1.4 1.8 Metros', 3, 14, 'hdmi1.jpg'),
-(27, 'Nanocable Cable HDMI v2.0 4K Macho/Macho 1m Negro', 6, 14, 'hdmi2.jpg'),
-(28, 'Cable SVGA Macho/Macho 1.8M', 8, 15, 'vga1.jpg'),
-(29, 'Startech Cable 30cm Duplicador Divisor de Vídeo VGA de 2 Puertos Salidas', 15, 15, 'vga2.jpg'),
-(30, 'Owlotech Cable de Red RJ45 UTP Cat.6 10/100/1000 Gris (2m)', 3, 16, 'red1.jpg'),
-(31, 'Cable de Red UTP RJ45 Cat 6e 50cm Azul', 2, 16, 'red2.jpg'),
-(32, 'Equip Cable Alimentación Molex/SATA 15 cm', 2, 17, 'ata1.jpg'),
-(33, 'Startech Cable Adaptador Bifurcador Divisor Splitter de Alimentación SATA de 0,15m 2x Hembra', 6, 17, 'ata2.jpg');
+(1, 'L-Link Fuente de Alimentación 650W PFC', 22, 1, 'assets/img/fuente1.jpg'),
+(2, 'Tacens APII500 Fuente Alimentación 500W', 13, 1, 'assets/img/fuente2.jpg'),
+(3, 'MSI Z370 Gaming Plus', 140, 2, 'assets/img/placa1.jpg'),
+(4, 'Gigabyte Z370P D3', 89, 2, 'assets/img/placa2.jpg\r\n'),
+(5, 'Crucial DDR4 2133 PC4-17000 8GB CL15', 75, 3, 'assets/img/ram1.jpg'),
+(6, 'Intel Core i7-8700K 3.7Ghz BOX', 319, 4, 'assets/img/procesador1.jpg'),
+(7, 'Intel Core i3-8100 3.6GHz BOX', 100, 4, 'assets/img/procesador2.jpg'),
+(8, 'Seagate BarraCuda 3.5\" 1TB SATA3', 45, 5, 'assets/img/discoduro1.jpg'),
+(9, 'Samsung 850 Evo SSD Series 250GB SATA3', 85, 5, 'assets/img/discoduro2.jpg'),
+(10, 'Asus Dual GTX 1060 OC 6GB GDDR5', 379, 6, 'assets/img/gpu1.jpg'),
+(11, 'MSI GeForce GTX 1070 Ti GAMING 8 GB GDDR5', 592, 6, 'assets/img/gpu2.jpg'),
+(12, 'HP Pavilion Desktop 570-P066NS AMD A10-9700/12GB/1TB/RX 460', 600, 7, 'assets/img/sobremesa1.jpg'),
+(13, 'HP OMEN 880-127NS Intel Core i7-8700/16GB/1TB+128GB SSD/GTX 1060', 1120, 7, 'assets/img/sobremesa2.jpg'),
+(14, 'HP Notebook 250 G6 Intel Core i5-7200U/8GB/256GB SSD/15.6\"', 595, 8, 'assets/img/portatil1.jpg'),
+(15, 'Portátil Lenovo IdeaPad 320-15AST AMD A4-9120/8GB/1TB/15.6\"', 419, 8, 'assets/img/portatil2.jpg'),
+(16, 'Logitech Keyboard K120', 14, 9, 'assets/img/keyboard1.jpg'),
+(17, 'Newskill Hanshi Spectrum Teclado Mecánico RGB Kailh Brown', 100, 9, 'assets/img/keyboard2.jpg'),
+(18, 'HP 200 Ratón Inalámbrico 1000DPI', 10, 12, 'assets/img/raton1.jpg'),
+(19, 'Razer DeathAdder Elite Ratón Gaming 16000 DPI Negro', 75, 10, 'assets/img/raton2.jpg'),
+(20, 'Samsung S24D330H 24\" LED', 135, 11, 'assets/img/monitor1.jpg'),
+(21, 'MSI Optix G24C 24\" FullHD Curvo', 255, 11, 'assets/img/monitor2.jpg'),
+(22, 'Logitech G430 Gaming Surround Sound 7.1', 75, 12, 'assets/img/auriculares1.jpg'),
+(23, 'SuperLux HD 668B', 30, 12, 'assets/img/auriculares2.jpg'),
+(24, 'Cable USB 3.0 Alargador Macho/Hembra 1m', 5, 13, 'assets/img/usb1.jpg'),
+(25, 'Nanocable Cable USB Tipo A a Tipo B Negro para Impresora', 1, 13, 'assets/img/usb2.jpg'),
+(26, 'Owlotech Cable HDMI 1.4 1.8 Metros', 3, 14, 'assets/img/hdmi1.jpg'),
+(27, 'Nanocable Cable HDMI v2.0 4K Macho/Macho 1m Negro', 6, 14, 'assets/img/hdmi2.jpg'),
+(28, 'Cable SVGA Macho/Macho 1.8M', 8, 15, 'assets/img/vga1.jpg'),
+(29, 'Startech Cable 30cm Duplicador Divisor de Vídeo VGA de 2 Puertos Salidas', 15, 15, 'assets/img/vga2.jpg'),
+(30, 'Owlotech Cable de Red RJ45 UTP Cat.6 10/100/1000 Gris (2m)', 3, 16, 'assets/img/red1.jpg'),
+(31, 'Cable de Red UTP RJ45 Cat 6e 50cm Azul', 2, 16, 'assets/img/red2.jpg'),
+(32, 'Equip Cable Alimentación Molex/SATA 15 cm', 2, 17, 'assets/img/ata1.jpg'),
+(33, 'Startech Cable Adaptador Bifurcador Divisor Splitter de Alimentación SATA de 0,15m 2x Hembra', 6, 17, 'assets/img/ata2.jpg');
 
 -- --------------------------------------------------------
 
@@ -236,48 +238,25 @@ INSERT INTO `proveedores` (`Id`, `Nombre`, `Email`, `Telefono`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `repartidores`
---
-
-CREATE TABLE `repartidores` (
-  `nombre` varchar(50) NOT NULL,
-  `telefono` int(10) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `repartidores`
---
-
-INSERT INTO `repartidores` (`nombre`, `telefono`, `id`) VALUES
-('Seur', 902101010, 1),
-('MRW', 938720101, 2),
-('NACEX', 938788472, 3);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `ventas`
 --
 
 CREATE TABLE `ventas` (
   `id` int(11) NOT NULL,
   `fecha` varchar(12) NOT NULL,
-  `hora` varchar(6) NOT NULL,
-  `numeroseguimiento` int(11) NOT NULL,
-  `id_repartidor` int(11) NOT NULL
+  `hora` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `fecha`, `hora`, `numeroseguimiento`, `id_repartidor`) VALUES
-(1, '03/04/2018', '10:04', 1401, 1),
-(2, '04/07/2017', '20:00', 1402, 3),
-(3, '10/04/2018', '14:41', 1403, 2),
-(4, '10/04/2018', '17:30', 1405, 1),
-(5, '14/01/2018', '08:37', 1406, 1);
+INSERT INTO `ventas` (`id`, `fecha`, `hora`) VALUES
+(1, '03/04/2018', '10:04'),
+(2, '04/07/2017', '20:00'),
+(3, '10/04/2018', '14:41'),
+(4, '10/04/2018', '17:30'),
+(5, '14/01/2018', '08:37');
 
 --
 -- Índices para tablas volcadas
@@ -326,12 +305,6 @@ ALTER TABLE `proveedores`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indices de la tabla `repartidores`
---
-ALTER TABLE `repartidores`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
@@ -346,46 +319,50 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `clientes-productos-ventas`
 --
 ALTER TABLE `clientes-productos-ventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT de la tabla `familias`
 --
 ALTER TABLE `familias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `opiniones`
 --
 ALTER TABLE `opiniones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `repartidores`
---
-ALTER TABLE `repartidores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
