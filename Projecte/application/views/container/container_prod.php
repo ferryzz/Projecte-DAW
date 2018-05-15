@@ -44,8 +44,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="col-md-4">
 							<div class="card">
 								<img src="http://cevirdikce.com/proje/hasem-2/images/finance-1.jpg">
-								<h2 ><?php echo $row->nombre;?></h2>
+								<h2 ><?php echo $row->nombre_corto;?></h2>
 								<h3>Preu:<?php echo $row->precio;?></h3>
+								<?php if(($row->stock)>0){
+										echo "<h3 class='stocks'>Disponible</h3>";
+								}else{
+									echo "<h3 class='stocks'>No Disponible</h3>";
+								}
+									
+								
+								?>
+								
 								<a href="detall.php" class="blue-button">Detall</a>
 							</div>
 						</div>	

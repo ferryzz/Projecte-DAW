@@ -21,7 +21,6 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper("url");
-		$this->load->helper("form");
 		
 	    $this->load->model("ProductesModel");
 	  
@@ -33,96 +32,115 @@ class Welcome extends CI_Controller {
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_prod',$data);
 		$this->load->view('footer/footer_s');
+		
+		
 	}
-
-	public function verProductos()
-      {
-      	$this->load->helper("form");
-      	$this->load->library('form_validation');
-		$this->form_validation->set_rules('buscar', 'Buscar', 'trim|min_length[4]|max_length[20]|prep_for_form');
-		$this->form_validation->set_message('min_length', 'La longitud minima es de 4');
-		$this->form_validation->set_message('max_length', 'La longitud maxima es de 20');
-      	if ($this->form_validation->run() == TRUE)
-                {
-			      	$this->load->helper("url");
-			      	$this->load->model('ProductesModel');//carguem el model
-			      	$a = $this->input->post('buscar');
-			        $resultat = array('resultat2' => $this->ProductesModel->select($a),
-			     					'categorias' => $this->ProductesModel->llista_cat(),
-			     					'p'=>$a);
-			        $this->load->view('header/header_s');
-			        $this->load->view('container/resultat',$resultat);
-					$this->load->view('footer/footer_s');
-			    }
-		else
-				{
-					$data = array(
-						'productos' => $this->ProductesModel->MostrarProductes()
-				);
-					$this->load->helper("url");
-					$this->load->view('header/header_s');
-					$this->load->view('container/container_prod',$data);
-					$this->load->view('footer/footer_s');
-				}
-      }
-
-      public function ordenar_nombres()
-      {
-      	$this->load->helper("url");
-      	$this->load->helper("form");
-      	$this->load->model('ProductesModel');//carguem el model
-      	$ordenar = $this->uri->segment(3);
-      	$search = $this->uri->segment(4);
-      	
-      	if ($ordenar == 'nombre') {
-      		$funcio = $this->ordenar_llista_nom($search);
-      	}elseif($ordenar == 'precio_desc'){
-      		$funcio = $this->ordenar_llista_preu_desc($search);
-      	}else{
-      		$funcio = $this->ordenar_llista_preu_asc($search);
-      	}
-
-      }
-
-      public function ordenar_llista_nom($search){
-      	$this->load->helper("url");
-      	$this->load->helper("form");
-      	//$this->load->model('informe_model');//carguem el model
-      	$ordenar = array('categorias' => $this->ProductesModel->llista_cat(),
-			     					'resultat2' => $this->ProductesModel->ordenar_llista_nom($search),
-			     					'p'=>$search);
-		$this->load->view('header/header_s');
-		$this->load->view('container/resultat',$ordenar);
-		$this->load->view('footer/footer_s');
-      }
-
-
-
-      public function ordenar_llista_preu_asc($search){
-      	$this->load->helper("url");
-      	$this->load->helper("form");
-      	//$this->load->model('informe_model');//carguem el model
-      	$ordenar2 = array('categorias' => $this->ProductesModel->llista_cat(),
-			     					'resultat2' => $this->ProductesModel->ordenar_llista_preu_asc($search),
-			     					'p'=>$search);
-      	$this->load->view('header/header_s');
-		$this->load->view('container/resultat',$ordenar2);
-		$this->load->view('footer/footer_s');
-      }
-
-
-
-      public function ordenar_llista_preu_desc($search){
-      	$this->load->helper("url");
-      	$this->load->helper("form");
-      	//$this->load->model('informe_model');//carguem el model
-      	$ordenar3 = array('categorias' => $this->ProductesModel->llista_cat(),
-			     					'resultat2' => $this->ProductesModel->ordenar_llista_preu_desc($search),
-			     					'p'=>$search);
-      	$this->load->view('header/header_s');
-		$this->load->view('container/resultat',$ordenar3);
-		$this->load->view('footer/footer_s');
-      }
 	
+	
+	public function login(){
+	  $this->load->helper("url");
+	  $this->load->library("session");
+	  $this->load->helper("form");
+	  
+	  $user = $this->input->post("email");
+	  $pass = $this->input->post("password");
+	  $this->load->model("UsuarisModel");
+	  
+    
+	  if ($this->UsuarisModel->existeixUsuari($user, $pass)){
+        
+		$this->load->helper("url");
+		
+        $datasession = array(
+          'email'  => $user,
+          'login_ok' => TRUE
+        );
+        
+        $this->session->set_userdata($datasession);
+		$this->load->model("ProductesModel");
+		$data = array('productos' => $this->ProductesModel->MostrarProductes());
+		
+        $this->load->view('header/header_c');
+		$this->load->view('container/container_prod',$data);
+	    $this->load->view('footer/footer_s');
+    }
+    else {
+      
+      $this->session->set_flashdata('error', 'El usuario o contraseña son incorrectos.');
+      $this->load->view('header/header_s');
+	  $this->load->view('container/container_prod',$data);
+	  $this->load->view('footer/footer_s');
+    }
+  } 
+  
+  public function logout()
+  {
+    $this->load->helper("url");
+	  $this->load->library("session");
+	  $this->load->helper("form");
+    
+    $datasession = array('email' => '', 'login_ok' => FALSE);
+    
+    $this->session->unset_userdata($datasession);
+	$this->session->sess_destroy();
+    
+     $this->load->view('header/header_s');
+	  $this->load->view('container/container_prod');
+	  $this->load->view('footer/footer_s');
+  }
+  
+	
+	public function quisom()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_quisom');
+		$this->load->view('footer/footer_s');
+	}
+	
+	public function garantia()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_garantia');
+		$this->load->view('footer/footer_s');
+	}
+	public function lugar()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_lugar');
+		$this->load->view('footer/footer_s');
+	}
+	public function aviso()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_aviso');
+		$this->load->view('footer/footer_s');
+	}
+	
+	public function pago()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_pago');
+		$this->load->view('footer/footer_s');
+	}
+	
+	public function privacidad()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_privacidad');
+		$this->load->view('footer/footer_s');
+	}
+	public function envio()
+	{
+		$this->load->helper("url");
+		$this->load->view('header/header_s');
+		$this->load->view('container/container_envio');
+		$this->load->view('footer/footer_s');
+	}
 	
 }

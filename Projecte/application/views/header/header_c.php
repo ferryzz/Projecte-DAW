@@ -101,24 +101,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-					  <a href="#"><span class="glyphicon glyphicon-user"></span> Inici Sessio</a>
+					  <a><span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata("email");?></a>
 					  <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
                         <li>
                            <div class="row">
                               <div class="col-md-12">
-                                 <form class="form" role="form" method="post" action="<?php echo site_url("welcome/login");?>">
-                                    <div class="input-group">
-                                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									   <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email" required> 
+                                 <div class="col-lg-8">
+                                       <p><a href="#"> Editar datos</a></p>
+									   <p><a href="#">Ver pedidos</a></p>
+									   <a href="<?php echo site_url("welcome/logout");?>" class="btn btn-danger btn-block">Tancar Sessió</a>
                                     </div>
-                                    <div class="input-group">
-                                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									   <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group">
-                                       <button type="submit" class="btn btn-primary btn-block btn_login">Login</button>
-                                    </div>
-                                 </form>
                               </div>
                            </div>
                         </li>

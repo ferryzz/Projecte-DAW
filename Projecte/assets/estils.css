@@ -144,8 +144,8 @@ COntainer
 }
 .index-content .card h2, h3{
     color:Black;
-	font-size:13px;
-	text-align: justify;
+	font-size:14px;
+	text-align: center;
 	margin:10px;
 }
 
@@ -159,7 +159,8 @@ COntainer
     border-radius: 4px;
     text-align: center;
     font-weight: lighter;
-    margin: 0px 20px 15px 20px;
+	position:relative;
+    left:38%;
     padding: 5px 0px;
     display: inline-block;
 }
@@ -174,6 +175,80 @@ COntainer
     }
 }
 
+.q2{
+	text-align: center;
+color: #0094d5;
+margin-bottom: 40px;
+border-bottom: 2px solid #0094d5;
+padding-bottom: 15px;
+	
+}
 
+.q3{
+	text-align: left;
+color: #0094d5;
+margin-bottom: 40px;
+border-bottom: 2px solid #0094d5;
+padding-bottom: 15px;
+	
+}
 
+/*Footer*/
 
+.footer {
+    padding: 50px 0 20px 0;
+    background-color: #090c14;
+    color: #878c94;
+}
+.footer .title{
+	text-align: left;
+	color:#fff;
+	font-size:25px;
+}
+.footer .social-icon{
+	padding:0px;
+	margin:0px;
+}
+.footer .social-icon a{
+	display:inline-block;
+	color:#fff;
+	font-size:25px;
+	padding:5px;
+}
+.footer .acount-icon a{
+	display:block;
+	color:#fff;
+	font-size:18px;
+	padding:5px;
+	text-decoration:none;
+}
+.footer .acount-icon .fa{
+	margin-right:25px;
+}
+.footer .category a {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 20px;
+    margin: 1px;
+    border-radius:4px;
+    margin-top: 6px;
+    background-color: black;
+    border: solid 1px #fff;
+}
+.footer .payment{
+	margin:0px;
+	padding:0px;
+	list-style-type:none
+}
+.footer .payment li{
+	list-style-type:none
+}
+.footer .payment li a {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    float: left;
+    font-size: 25px;
+    padding: 10px 10px;
+}
