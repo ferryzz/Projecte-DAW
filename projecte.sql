@@ -3,11 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
-<<<<<<< HEAD
--- Tiempo de generación: 17-05-2018 a las 20:52:12
-=======
--- Tiempo de generación: 17-05-2018 a las 21:16:03
->>>>>>> 8601e09ad1511ecc5e1feb03419bd6fc68b6b011
+-- Tiempo de generación: 21-05-2018 a las 15:49:02
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -71,7 +67,7 @@ CREATE TABLE `cliente` (
   `email` varchar(40) NOT NULL,
   `telefono` varchar(13) NOT NULL,
   `direccion` varchar(80) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `password` varchar(64) NOT NULL,
   `cp` varchar(5) NOT NULL,
   `poblacion` varchar(50) NOT NULL,
   `Provincia` varchar(50) NOT NULL,
@@ -370,7 +366,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `clientes_productos_ventas`
 --
 ALTER TABLE `clientes_productos_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT de la tabla `familias`
 --
@@ -400,7 +396,7 @@ ALTER TABLE `repartidores`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
