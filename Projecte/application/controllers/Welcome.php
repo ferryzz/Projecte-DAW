@@ -233,7 +233,7 @@ class Welcome extends CI_Controller {
     	$this->load->model("ValidarUsuariModel");
     	$this->load->helper("url");
       	$session = $this->session->userdata();
-      	$session["login"]=1;
+      	//$session["login"]=1;
       	$this->session->set_userdata($session);
       	if (!isset($session["login"]) or $session["login"]==0){
       		$this->load->view('header/header_s');
