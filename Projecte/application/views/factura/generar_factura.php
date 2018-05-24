@@ -115,7 +115,8 @@ $params  = array( "RemiseGlobale" => 1,
 $iva_total=($total/100)*21;
 $total_amb_iva=$total+$iva_total;
 $pdf->addCadreEurosFrancs($total,$iva_total,$total_amb_iva);
-$pdf->Output();
+$filename="assets/pdf/FC_".$IDventa.".pdf";
+$pdf->Output('F',$filename);
 
 ?>
 

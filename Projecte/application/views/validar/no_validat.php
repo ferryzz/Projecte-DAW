@@ -1,4 +1,10 @@
 <?php
+/**
+    * Vista que li diu al ususari que ha d'iniciar sessió
+    * @author Sergi
+    */
+?>
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">

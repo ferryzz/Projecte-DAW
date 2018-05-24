@@ -1,4 +1,10 @@
 <?php
+/**
+    * Vista que mostra per pantalla el contingut de la cistella de compres
+    * @author Sergi
+    */
+?>
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">

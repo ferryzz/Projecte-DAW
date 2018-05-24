@@ -1,5 +1,5 @@
 <?php
-require('/fpdf181/fpdf.php');
+require('fpdf181/fpdf.php');
 define('EURO', chr(128) );
 define('EURO_VAL', 6.55957 );
 
@@ -288,7 +288,7 @@ function addEcheance( $date )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2 - $r1)/2 - 5 , $y1+1 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,4, "FECHA DE PAGO", 0, 0, "C");
+    $this->Cell(10,4, "FECHA DE PEDIDO", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5 , $y1 + 5 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$date, 0,0, "C");
@@ -337,24 +337,24 @@ function addCols( $tab )
     $this->Line( $r1, $y1+6, $r1+$r2, $y1+6);
     $colX = $r1;
     $colonnes = $tab;
-    while ( list( $lib, $pos ) = each ($tab) )
-    {
-        $this->SetXY( $colX, $y1+2 );
-        $this->Cell( $pos, 1, $lib, 0, 0, "C");
-        $colX += $pos;
-        $this->Line( $colX, $y1, $colX, $y1+$y2);
-    }
+ while ( list( $lib, $pos ) = each ($tab) )
+  {
+     $this->SetXY( $colX, $y1+2 );
+  $this->Cell( $pos, 1, $lib, 0, 0, "C");
+     $colX += $pos;
+      $this->Line( $colX, $y1, $colX, $y1+$y2);
+        }
 }
 
 function addLineFormat( $tab )
 {
     global $format, $colonnes;
     
-    while ( list( $lib, $pos ) = each ($colonnes) )
-    {
-        if ( isset( $tab["$lib"] ) )
-            $format[ $lib ] = $tab["$lib"];
-    }
+while ( list( $lib, $pos ) = each ($colonnes) )
+{
+     if ( isset( $tab["$lib"] ) )
+        $format[ $lib ] = $tab["$lib"];
+ }
 }
 
 function lineVert( $tab )
@@ -363,14 +363,14 @@ function lineVert( $tab )
 
     reset( $colonnes );
     $maxSize=0;
-    while ( list( $lib, $pos ) = each ($colonnes) )
-    {
-        $texte = $tab[ $lib ];
-        $longCell  = $pos -2;
-        $size = $this->sizeOfText( $texte, $longCell );
-        if ($size > $maxSize)
-            $maxSize = $size;
-    }
+while ( list( $lib, $pos ) = each ($colonnes) )
+{
+     $texte = $tab[ $lib ];
+  $longCell  = $pos -2;
+    $size = $this->sizeOfText( $texte, $longCell );
+     if ($size > $maxSize)
+        $maxSize = $size;
+ }
     return $maxSize;
 }
 
@@ -390,20 +390,20 @@ function addLine( $ligne, $tab )
     $maxSize      = $ligne;
 
     reset( $colonnes );
-    while ( list( $lib, $pos ) = each ($colonnes) )
-    {
-        $longCell  = $pos -2;
-        $texte     = $tab[ $lib ];
-        $length    = $this->GetStringWidth( $texte );
-        $tailleTexte = $this->sizeOfText( $texte, $length );
-        $formText  = $format[ $lib ];
-        $this->SetXY( $ordonnee, $ligne-1);
-        $this->MultiCell( $longCell, 4 , $texte, 0, $formText);
-        if ( $maxSize < ($this->GetY()  ) )
-            $maxSize = $this->GetY() ;
-        $ordonnee += $pos;
-    }
-    return ( $maxSize - $ligne );
+ while ( list( $lib, $pos ) = each ($colonnes) )
+ {
+  $longCell  = $pos -2;
+   $texte     = $tab[ $lib ];
+$length    = $this->GetStringWidth( $texte );
+$tailleTexte = $this->sizeOfText( $texte, $length );
+$formText  = $format[ $lib ];
+$this->SetXY( $ordonnee, $ligne-1);
+$this->MultiCell( $longCell, 4 , $texte, 0, $formText);
+if ( $maxSize < ($this->GetY()  ) )
+         $maxSize = $this->GetY() ;
+      $ordonnee += $pos;
+  }
+ return ( $maxSize - $ligne );
 }
 
 function addRemarque($remarque)

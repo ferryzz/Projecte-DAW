@@ -144,12 +144,11 @@ class Welcome extends CI_Controller {
 	}
 	
 	public function cesta_resumen(){
+    /**
+    * Mètode que fa que es mostri per pantalla els productes que hi ha a la variable de sessió cistella
+    * @author Sergi
+    */
 		$this->load->helper("url");
-		//$newdata = array( 
-   		//	'user_id'  => '1', 
-   		//	'cesta'     => array(1,2,1,1,4,2,4,1,3)
-		//); 
-		//$this->session->set_userdata($newdata);
 		$session = $this->session->userdata();
 	    $this->load->model("CestaResumenModel");
 	    if (isset($session["cesta"])) {
@@ -163,13 +162,25 @@ class Welcome extends CI_Controller {
 	    
 	  	
 
-	    $this->load->view('header/header_s');
+	  $this->load->view('header/header_s');
 		$this->load->view('container/container_cesta_resumen',$data);
 		$this->load->view('footer/footer_s'); 
 	}
 
 	public function addproduct($productID = 0, $cantidad = 0)
-    {
+  {
+      /**
+    * Mètode que afegeix un producte a la cistella
+    * @param $productID és el id de producte i $cantidad la cantitat d'aquest producte
+    * @author Sergi
+    */
+      $this->load->helper("url");
+      $this->load->helper("form");
+      if ($cantidad==0) {
+        $cantidad=$this->input->post("quantity");
+      }
+
+
     	for ($i=0; $i < $cantidad; $i++) { 
     		# code...
     	
@@ -183,21 +194,16 @@ class Welcome extends CI_Controller {
       $this->load->view('redirect/redirect',$session2);
     }
 
-    public function factura($IDventa = 0)
-    {
-    	$this->load->helper("url");
-    	$this->load->model("GenerarFacturaModel");
-    	$data = array(
-				'usuari' => $this->GenerarFacturaModel->getClient($IDventa),
-				'productos' => $this->GenerarFacturaModel->getProductos($IDventa),
-				'IDventa' => $IDventa
-		);
-    	$this->load->view('factura/generar_factura',$data);
-
-    }
-
     public function borrarproducto ($productID = 0, $cantidad = 0)
     {
+      /**
+    * Mètode que esborra un producte de la cistella
+    * @param $productID és el id de producte i $cantidad la cantitat d'aquest producte
+    * @author Sergi
+    */
+      if ($cantidad>1) {
+        $cantidad=1;
+      }
     	for ($i=0; $i < $cantidad; $i++) { 
     		# code...
     	
@@ -218,12 +224,16 @@ class Welcome extends CI_Controller {
       $this->load->view('redirect/redirect',$session2);
     }
 
-    public function validar ()
+     public function validar ()
     {
+       /**
+    * Mètode que valida que un usuari hagi iniciat sessió per a completar la compra
+    * @author Sergi
+    */
     	$this->load->model("ValidarUsuariModel");
     	$this->load->helper("url");
       	$session = $this->session->userdata();
-      	$session["login"]=3;
+      	$session["login"]=1;
       	$this->session->set_userdata($session);
       	if (!isset($session["login"]) or $session["login"]==0){
       		$this->load->view('header/header_s');
@@ -241,8 +251,12 @@ class Welcome extends CI_Controller {
       
     }
 
-    public function pago ()
-    {
+    public function pago (){
+
+      /**
+    * Mètode que carrega la pestanya per escollir el pagament
+    * @author Sergi
+    */
     	$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('pago/prepago');
@@ -251,6 +265,10 @@ class Welcome extends CI_Controller {
 
     public function finalizar ()
     {
+      /**
+    * Mètode que acaba la compra i reinicia la sessió
+    * @author Sergi
+    */
     	$this->load->helper("url");
     	$this->load->model("FinalizarCompraModel");
     	$session = $this->session->userdata();
@@ -259,12 +277,58 @@ class Welcome extends CI_Controller {
     	$session = array('login' => $usuari);
     	$this->session->sess_destroy();
     	$session = $this->session->userdata();
-      	$array=$session["cesta"];
-      	$array[]=2;
+      $array=$session["cesta"];
+      $array[]=2;
       	$this->session->set_userdata($session);
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_compra_ok');
 		$this->load->view('footer/footer_s'); 
+     }
+	 
+	 public function mispedidos ()
+    {
+      /**
+    * Mètode que fa les consultes a les bd i mostra els pdf's corresponents
+    * @author Sergi
+    */
+    $this->load->helper("url");
+    $session = $this->session->userdata();
+    $this->load->model("MisPedidosModel");
+    if (isset($session["login"]) or $session["login"]==0) {
+        $data = array(
+        'pedidos' => $this->MisPedidosModel->getPedidos($session)
+    );
+    $this->load->view('header/header_s');
+    $this->load->view('container/container_mis_pedidos',$data);
+    $this->load->view('footer/footer_s'); 
+      }else{
+        $this->load->view('header/header_s');
+          $this->load->view('validar/no_validat');
+          $this->load->view('footer/footer_s'); 
+      }
+    
+     }
+	 
+	 public function ver_pedido ($idpedido)
+    {
+      /**
+    * Mètode que mostra per pantalla el pdf de pedido
+    * @param $idpedido el id de la compra a mostrar
+    * @author Sergi
+    */
+    $this->load->helper("url");
+    $session = $this->session->userdata();
+    $this->load->model("MisPedidosModel");
+    if (isset($session["login"]) or $session["login"]==0) {
+
+      $this->MisPedidosModel->verPedido($session,$idpedido);
+
+      }else{
+        $this->load->view('header/header_s');
+          $this->load->view('validar/no_validat');
+          $this->load->view('footer/footer_s'); 
+      }
+    
      }
 	
 }

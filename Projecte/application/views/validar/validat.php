@@ -1,4 +1,10 @@
 <?php
+/**
+    * Vista que demana al usuari que confirmi les seves dades per a fer la compra
+    * @author Sergi
+    */
+?>
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">
@@ -11,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p>Número de contacto: <?php echo $row->telefono; ?></p>
 				<p>Dirección de entrega: <?php echo $row->direccion; ?></p>
 				<p>Población: <?php echo $row->poblacion." (".$row->cp.")"; ?></p>
-				<p>Província: <?php echo $row->Provincia; ?></p>
+				<p>Província: <?php echo $row->provincia; ?></p>
 				<p>País: <?php echo $row->pais; ?></p>
 				<?php }?>					
 				<button type="button" class="btn btn-primary" onclick="location.href='http://localhost/proj/index.php/welcome/pago'">Pasar al pago</button>
