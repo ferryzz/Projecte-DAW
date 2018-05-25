@@ -26,78 +26,209 @@ class Welcome extends CI_Controller {
     */
 		$this->load->helper("url");
     $this->load->helper("form");
-		
-	    $this->load->model("ProductesModel");
-	  
-	    $data = array(
+		$this->load->model("ProductesModel");
+    
+      $data = array(
             'productos' => $this->ProductesModel->MostrarProductes(),
             'familias' => $this->ProductesModel->MostrarFamilias(),
             'categorias' => $this->ProductesModel->llista_cat());
-				
-		$this->load->helper("url");
-		$this->load->view('header/header_s',$data);
+	  $this->header();
 		$this->load->view('container/container_prod',$data);
 		$this->load->view('footer/footer_s');
 		
 		
 	}
+  public function header()
+  {
+     $this->load->helper("url");
+     $this->load->helper("form");
+     $this->load->model("ProductesModel");
+    $data = array(
+            'productos' => $this->ProductesModel->MostrarProductes(),
+            'familias' => $this->ProductesModel->MostrarFamilias(),
+            'categorias' => $this->ProductesModel->llista_cat());
+        
+    $this->load->helper("url");
+
+     if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$data);
+    }
+    else{
+      $session = $this->session->userdata();
+      $data2 = array(
+            'productos' => $this->ProductesModel->MostrarProductes(),
+            'familias' => $this->ProductesModel->MostrarFamilias(),
+            'categorias' => $this->ProductesModel->llista_cat(),
+            'id' => $session['login']);
+      $this->load->view('header/header_c',$data2);
+    }
+    
+    
+  }
 	
 	
 	public function login(){
-	  $this->load->helper("url");
-	  $this->load->library("session");
-	  $this->load->helper("form");
-	  
-	  $user = $this->input->post("email");
-	  $pass = $this->input->post("password");
-	  $this->load->model("UsuarisModel");
-	  
+    $this->load->helper("url");
+    $this->load->library("session");
+    $this->load->helper("form");
+    $this->load->model("ProductesModel");
     
-	  if ($this->UsuarisModel->existeixUsuari($user, $pass)){
-        
-		$this->load->helper("url");
-		
-        $datasession = array(
+    $user = $this->input->post("email");
+    $pass = $this->input->post("password");
+    $this->load->model("UsuarisModel");
+    
+    
+   
+    $vara=$this->UsuarisModel->existeixUsuari($user, $pass);
+    if ($vara!=0){ 
+      $datasession = array(
           'email'  => $user,
-          'login_ok' => TRUE
+          'login_ok' => TRUE,
+      'login'=>$vara
         );
         
-    $this->session->set_userdata($datasession);
-		$this->load->model("ProductesModel");
-		$data = array('productos' => $this->ProductesModel->MostrarProductes(),
-                              'familias' => $this->ProductesModel->MostrarFamilias(),
-                              'categorias' => $this->ProductesModel->llista_cat());
-		
-    $this->load->view('header/header_c',$data);
-		$this->load->view('container/container_prod',$data);
-    $this->load->view('footer/footer_s');
-    }
-    else {
+        $this->session->set_userdata($datasession);
+    
+    $data = array('productos' => $this->ProductesModel->MostrarProductes());
+    
+        $this->header();
+        $this->load->view('container/container_prod',$data);
+        $this->load->view('footer/footer_s');
       
-    $this->session->set_flashdata('error', 'El usuario o contraseña son incorrectos.');
-    $this->load->view('header/header_s',$data);
-	  $this->load->view('container/container_prod',$data);
-	  $this->load->view('footer/footer_s');
+    } else {
+      $this->session->set_flashdata('error', 'El usuario o contraseña son incorrectos.');
+    $this->header();
+    $this->load->view('container/container_error_log');
+    $this->load->view('footer/footer_s');
+   
     }
-  } 
+    
+    
+   
+  }
+  public function eliminar ()
+    {
+       /**
+    * Mètode que permet al administrador eliminar usuaris de la BD
+    * @author Sergi
+    */
+      $this->load->model("UsuarisModel");
+      $this->load->helper("url");
+        $session = $this->session->userdata();
+        //$session["login"]=500;
+        $this->session->set_userdata($session);
+        if (!isset($session["login"]) or $session["login"]!=500){
+
+      $this->header();
+      $this->load->view('validar/no_permis');
+      $this->load->view('footer/footer_s');
+
+        }else{
+          $data = array(
+        'usuaris' => $this->UsuarisModel->getUsuaris($session)
+
+      );
+           
+      $this->header();
+      $this->load->view('admin/usuaris',$data);
+      $this->load->view('footer/footer_s');
+    }
+        }
+      
+         public function completar ()
+    {
+       /**
+    * Mètode que permet al administrador completar les compres pendents
+    * @author Sergi
+    */
+      $this->load->model("CompletarPedidosModel");
+      $this->load->helper("url");
+        $session = $this->session->userdata();
+        //$session["login"]=500;
+        $this->session->set_userdata($session);
+        if (!isset($session["login"]) or $session["login"]!=500){
+          
+      
+      $this->header();
+      $this->load->view('validar/no_permis');
+      $this->load->view('footer/footer_s');
+   
+        }else{
+          $data = array(
+        'pedidos' => $this->CompletarPedidosModel->getPedidos($session)
+
+      );
+     
+      $this->header();
+      $this->load->view('admin/pedidos',$data);
+      $this->load->view('footer/footer_s');
+        }
+      
+    }
+
+  public function eliminars ()
+    {
+       /**
+    * Mètode que permet al administrador eliminar als usuaris de la BD
+    * @author Sergi
+    */
+      $this->load->model("UsuarisModel");
+      $this->load->helper("url");
+        $session = $this->session->userdata();
+        //$session["login"]=500;
+        $this->session->set_userdata($session);
+        if (!isset($session["login"]) or $session["login"]!=500){
+          $this->header();
+          $this->load->view('validar/no_permis');
+          $this->load->view('footer/footer_s'); 
+        }else{
+           $this->load->helper("form");
+          $id=$this->input->post("id");
+          $this->UsuarisModel->eliminar($id);
+          $this->eliminar();
+        }
+      
+    }
+    public function modificar ()
+    {
+       /**
+    * Mètode que permet al administrador modificar a la BD les comandes enviades
+    * @author Sergi
+    */
+      $this->load->model("CompletarPedidosModel");
+      $this->load->helper("url");
+        $session = $this->session->userdata();
+        //$session["login"]=500;
+        $this->session->set_userdata($session);
+        if (!isset($session["login"]) or $session["login"]!=500){
+          $this->header();
+          $this->load->view('validar/no_permis');
+          $this->load->view('footer/footer_s'); 
+        }else{
+           $this->load->helper("form");
+          $id=$this->input->post("id");
+          $seguimiento=$this->input->post("seguimiento");
+          $idtrans=$this->input->post("select");
+          $total=$this->input->post("total"); 
+          $this->CompletarPedidosModel->modificar($id,$seguimiento,$idtrans,$total);
+          $this->completar();
+        }
+      
+    }
   
   public function logout()
   {
     $this->load->helper("url");
-	  $this->load->library("session");
-	  $this->load->helper("form");
+    $this->load->library("session");
+    $this->load->helper("form");
     
-    $datasession = array('email' => '', 'login_ok' => FALSE,
-                        'productos' => $this->ProductesModel->MostrarProductes(),
-                        'familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
+    $datasession = array('email' => '', 'login_ok' => FALSE);
     
     $this->session->unset_userdata($datasession);
-	$this->session->sess_destroy();
+  $this->session->sess_destroy();
     
-     $this->load->view('header/header_s',$datasession);
-	  $this->load->view('container/container_prod',$datasession);
-	  $this->load->view('footer/footer_s');
+     redirect("welcome/index");
   }
   
 	
@@ -107,11 +238,7 @@ class Welcome extends CI_Controller {
     * Mètode que mostra la pagina de quisom
     * @author Julio
     */	
-      	$this->load->model("ProductesModel");
-      	$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
-		$this->load->helper("url");
-		$this->load->view('header/header_s',$data);
+    $this->header();
 		$this->load->view('container/container_quisom');
 		$this->load->view('footer/footer_s');
 	}
@@ -122,11 +249,7 @@ class Welcome extends CI_Controller {
     * Mètode que mostra la pagina de garantia
     * @author Julio
     */
-		$this->load->helper("url");
-		$this->load->model("ProductesModel");
-		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
-		$this->load->view('header/header_s',$data);
+		$this->header();
 		$this->load->view('container/container_garantia');
 		$this->load->view('footer/footer_s');
 	}
@@ -136,11 +259,7 @@ class Welcome extends CI_Controller {
     * Mètode que mostra la pagina de lloc
     * @author Julio
     */
-		$this->load->helper("url");
-		$this->load->model("ProductesModel");
-		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
-		$this->load->view('header/header_s',$data);
+		$this->header();
 		$this->load->view('container/container_lugar');
 		$this->load->view('footer/footer_s');
 	}
@@ -150,11 +269,7 @@ class Welcome extends CI_Controller {
     * Mètode que mostra la pagina d'avis
     * @author Julio
     */
-		$this->load->helper("url");
-		$this->load->model("ProductesModel");
-		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
-		$this->load->view('header/header_s',$data);
+		$this->header();
 		$this->load->view('container/container_aviso');
 		$this->load->view('footer/footer_s');
 	}
@@ -173,11 +288,7 @@ class Welcome extends CI_Controller {
     * Mètode que mostra la pagina de privacitat
     * @author Julio
     */
-		$this->load->helper("url");
-		$this->load->model("ProductesModel");
-		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
-		$this->load->view('header/header_s',$data);
+		$this->header();
 		$this->load->view('container/container_privacidad');
 		$this->load->view('footer/footer_s');
 	}
@@ -187,11 +298,7 @@ class Welcome extends CI_Controller {
     * Mètode que mostra la pagina d'envio
     * @author Julio
     */
-		$this->load->helper("url");
-		$this->load->model("ProductesModel");
-		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
-                        'categorias' => $this->ProductesModel->llista_cat());
-		$this->load->view('header/header_s',$data);
+	  $this->header();
 		$this->load->view('container/container_envio');
 		$this->load->view('footer/footer_s');
 	}
@@ -204,13 +311,10 @@ class Welcome extends CI_Controller {
 		$this->load->helper("url");
 		$session = $this->session->userdata();
 	    $this->load->model("CestaResumenModel");
-      $this->load->model("ProductesModel");
 	    if (isset($session["cesta"])) {
 	    	$data = array(
 				'productes' => $this->CestaResumenModel->getProductes($session),
 				'cantidades' => $this->CestaResumenModel->getCantidades($session),
-        'familias' => $this->ProductesModel->MostrarFamilias(),
-        'categorias' => $this->ProductesModel->llista_cat()
 		);
 	    }else{
 	    	$data = array();
@@ -218,7 +322,7 @@ class Welcome extends CI_Controller {
 	    
 	  	
 
-	  $this->load->view('header/header_s',$data);
+	  $this->header();
 		$this->load->view('container/container_cesta_resumen',$data);
 		$this->load->view('footer/footer_s'); 
 	}
@@ -279,31 +383,28 @@ class Welcome extends CI_Controller {
     }
 
      public function validar ()
-    {
-       /**
+    {/**
     * Mètode que valida que un usuari hagi iniciat sessió per a completar la compra
     * @author Sergi
     */
-    	$this->load->model("ValidarUsuariModel");
-      $this->load->model("ProductesModel");
-    	$this->load->helper("url");
-      	$session = $this->session->userdata();
-      	$session["login"]=1;
-      	$this->session->set_userdata($session);
-        $data = array(
-        'usuari' => $this->ValidarUsuariModel->getUsuari($session),
-        'familias' => $this->ProductesModel->MostrarFamilias(),
-        'categorias' => $this->ProductesModel->llista_cat()
-        );
-      	if (!isset($session["login"]) or $session["login"]==0){
-      		//$this->load->view('header/header_s',$data);
-      		$this->load->view('validar/no_validat');
-      		$this->load->view('footer/footer_s'); 
-      	}else{
-      		$this->load->view('header/header_s',$data);
-          $this->load->view('validar/validat',$data);
-          $this->load->view('footer/footer_s'); 
-      	}
+      $this->load->model("ValidarUsuariModel");
+      $this->load->helper("url");
+        $session = $this->session->userdata();
+        //$session["login"]=1;
+        $this->session->set_userdata($session);
+        if (!isset($session["login"]) or $session["login"]==0){
+      $this->header();
+      $this->load->view('validar/no_validat');
+      $this->load->view('footer/footer_s');
+    }else{
+          $data = array(
+        'usuari' => $this->ValidarUsuariModel->getUsuari($session)
+
+      );
+      $this->header();
+      $this->load->view('validar/validat',$data);
+      $this->load->view('footer/footer_s');
+        }
       
     }
 
@@ -314,12 +415,7 @@ class Welcome extends CI_Controller {
     * @author Sergi
     */
     $this->load->helper("url");
-    $this->load->model("ProductesModel");
-    $data = array(
-        'familias' => $this->ProductesModel->MostrarFamilias(),
-        'categorias' => $this->ProductesModel->llista_cat()
-        );
-		$this->load->view('header/header_s',$data);
+    $this->header();
 		$this->load->view('container/container_pago');
 		$this->load->view('footer/footer_s'); 
      }
@@ -341,7 +437,7 @@ class Welcome extends CI_Controller {
       $array=$session["cesta"];
       $array[]=2;
       	$this->session->set_userdata($session);
-		$this->load->view('header/header_s');
+		$this->header();
 		$this->load->view('container/container_compra_ok');
 		$this->load->view('footer/footer_s'); 
      }
@@ -359,11 +455,11 @@ class Welcome extends CI_Controller {
         $data = array(
         'pedidos' => $this->MisPedidosModel->getPedidos($session)
     );
-    $this->load->view('header/header_s');
+    $this->header();
     $this->load->view('container/container_mis_pedidos',$data);
     $this->load->view('footer/footer_s'); 
       }else{
-        $this->load->view('header/header_s');
+          $this->header();
           $this->load->view('validar/no_validat');
           $this->load->view('footer/footer_s'); 
       }
@@ -385,7 +481,7 @@ class Welcome extends CI_Controller {
       $this->MisPedidosModel->verPedido($session,$idpedido);
 
       }else{
-        $this->load->view('header/header_s');
+          $this->header();
           $this->load->view('validar/no_validat');
           $this->load->view('footer/footer_s'); 
       }
@@ -406,26 +502,42 @@ class Welcome extends CI_Controller {
         if ($this->form_validation->run() == TRUE)
                 {
               $this->load->helper("url");
+              $session = $this->session->userdata();
               $this->load->model('ProductesModel');//carguem el model
               $a = $this->input->post('buscar');
               $resultat = array('resultat2' => $this->ProductesModel->select($a),
                     'categorias' => $this->ProductesModel->llista_cat(),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
-                    'p'=>$a);
-              $this->load->view('header/header_s',$resultat);
+                    'p'=>$a,
+                  'id' => $session['login']);
+               if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$resultat);
+    }
+    else{
+      $this->load->view('header/header_c',$resultat);
+    }
               $this->load->view('container/resultat',$resultat);
           $this->load->view('footer/footer_s');
           }
     else
         {
-          $this->load->model('ProductesModel');//carguem el model
+          $this->load->model('ProductesModel');
+          $session = $this->session->userdata();//carguem el model
           $data = array(
             'productos' => $this->ProductesModel->MostrarProductes(),
             'familias' => $this->ProductesModel->MostrarFamilias(),
             'categorias' => $this->ProductesModel->llista_cat(),
+            'id' => $session['login']
         );
           $this->load->helper("url");
-          $this->load->view('header/header_s',$data);
+           if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$data);
+    }
+    else{
+      $this->load->view('header/header_c',$data);
+    }
           $this->load->view('container/container_prod',$data);
           $this->load->view('footer/footer_s');
         }
@@ -477,12 +589,20 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $this->load->model('ProductesModel');//carguem el model
         $ordenar = array('categorias' => $this->ProductesModel->llista_cat(),
                     'resultat2' => $this->ProductesModel->ordenar_llista_nom($search),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
-                    'p'=>$search);
-    $this->load->view('header/header_s',$ordenar);
+                    'p'=>$search,
+                  'id' => $session['login']);
+     if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$ordenar);
+    }
+    else{
+      $this->load->view('header/header_c',$ordenar);
+    }
     $this->load->view('container/resultat',$ordenar);
     $this->load->view('footer/footer_s');
       }
@@ -497,12 +617,21 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $this->load->model('ProductesModel');//carguem el model
         $ordenar2 = array('categorias' => $this->ProductesModel->llista_cat(),
                     'resultat2' => $this->ProductesModel->ordenar_llista_preu_asc($search),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
-                    'p'=>$search);
-        $this->load->view('header/header_s',$ordenar2);
+                    'p'=>$search,
+                  'id' => $session['login']);
+
+         if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$ordenar2);
+    }
+    else{
+      $this->load->view('header/header_c',$ordenar2);
+    }
     $this->load->view('container/resultat',$ordenar2);
     $this->load->view('footer/footer_s');
       }
@@ -517,12 +646,20 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $this->load->model('ProductesModel');//carguem el model
         $ordenar3 = array('categorias' => $this->ProductesModel->llista_cat(),
                     'resultat2' => $this->ProductesModel->ordenar_llista_preu_desc($search),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
-                    'p'=>$search);
-        $this->load->view('header/header_s',$ordenar3);
+                    'p'=>$search,
+                  'id' => $session['login']);
+         if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$ordenar3);
+    }
+    else{
+      $this->load->view('header/header_c',$ordenar3);
+    }
     $this->load->view('container/resultat',$ordenar3);
     $this->load->view('footer/footer_s');
       }
@@ -534,14 +671,22 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $this->load->model('ProductesModel');
         $b = $this->input->post('categoria');
         $filtrar_cat = array('categorias' => $this->ProductesModel->llista_cat(),
                     'resultat2' => $this->ProductesModel->filtrar_cat($b,$search),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
                     'id_cat'=>$b,
-                      'p'=>$search);
-        $this->load->view('header/header_s',$filtrar_cat);
+                      'p'=>$search,
+                    'id' => $session['login']);
+         if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$filtrar_cat);
+    }
+    else{
+      $this->load->view('header/header_c',$filtrar_cat);
+    }
     $this->load->view('container/resultat',$filtrar_cat);
     $this->load->view('footer/footer_s');
       }
@@ -555,14 +700,22 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $id_cat = $this->uri->segment(5);
         $this->load->model('ProductesModel');//carguem el model
         $ordenar3 = array('categorias' => $this->ProductesModel->llista_cat(),
                 'resultat2' => $this->ProductesModel->ordenar_cat_preu_asc($id_cat,$search),
                 'familias' => $this->ProductesModel->MostrarFamilias(),
                 'p'=>$search,
-                  'id_cat'=>$id_cat);
-        $this->load->view('header/header_s',$ordenar3);
+                  'id_cat'=>$id_cat,
+                'id' => $session['login']);
+         if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$ordenar3);
+    }
+    else{
+      $this->load->view('header/header_c',$ordenar3);
+    }
     $this->load->view('container/resultat',$ordenar3);
     $this->load->view('footer/footer_s');
       }
@@ -576,14 +729,22 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $id_cat = $this->uri->segment(5);
         $this->load->model('ProductesModel');//carguem el model
         $ordenar3 = array('categorias' => $this->ProductesModel->llista_cat(),
                     'resultat2' => $this->ProductesModel->ordenar_cat_preu_desc($id_cat,$search),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
                     'p'=>$search,
-                      'id_cat'=>$id_cat);
-        $this->load->view('header/header_s',$ordenar3);
+                      'id_cat'=>$id_cat,
+                    'id' => $session['login']);
+         if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$ordenar3);
+    }
+    else{
+      $this->load->view('header/header_c',$ordenar3);
+    }
     $this->load->view('container/resultat',$ordenar3);
     $this->load->view('footer/footer_s');
       }
@@ -596,14 +757,22 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $id_cat = $this->uri->segment(5);
         $this->load->model('ProductesModel');//carguem el model
         $ordenar3 = array('categorias' => $this->ProductesModel->llista_cat(),
                     'resultat2' => $this->ProductesModel->ordenar_cat_nombre($id_cat,$search),
                     'familias' => $this->ProductesModel->MostrarFamilias(),
                     'p'=>$search,
-                      'id_cat'=>$id_cat);
-        $this->load->view('header/header_s',$ordenar3);
+                      'id_cat'=>$id_cat,
+                    'id' => $session['login']);
+         if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$ordenar3);
+    }
+    else{
+      $this->load->view('header/header_c',$ordenar3);
+    }
     $this->load->view('container/resultat',$ordenar3);
     $this->load->view('footer/footer_s');
       }
@@ -616,15 +785,23 @@ class Welcome extends CI_Controller {
       */
         $this->load->helper("url");
         $this->load->helper("form");
+        $session = $this->session->userdata();
         $this->load->model('ProductesModel');//carguem el model
         $categoria = $this->uri->segment(3);
         $comprovar_cat = $this->ProductesModel->comprovar_categoria();
       if ($comprovar_cat!=false){
         $resultat =  array('resultat2' => $this->ProductesModel->select_categoria($categoria),
                   'familias' => $this->ProductesModel->MostrarFamilias(),
-                  'categorias' => $this->ProductesModel->llista_cat()
+                  'categorias' => $this->ProductesModel->llista_cat(),
+                  'id' => $session['login']
                   );
-        $this->load->view('header/header_s',$resultat);
+       if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$resultat);
+    }
+    else{
+      $this->load->view('header/header_c',$resultat);
+    }
       $this->load->view('container/select_categorias',$resultat);
       $this->load->view('footer/footer_s');
         }
@@ -638,13 +815,21 @@ class Welcome extends CI_Controller {
     $this->load->helper("url");
         $this->load->helper("form");
         $productID = $this->uri->segment(3);
+        $session = $this->session->userdata();
         $this->load->model('ProductesModel');//carguem el model
         $resultat =  array('detall' => $this->ProductesModel->mostrar_detall($productID),
                   'familias' => $this->ProductesModel->MostrarFamilias(),
                   'categorias' => $this->ProductesModel->llista_cat(),
-                  'id_producte' => $productID
+                  'id_producte' => $productID,
+                  'id' => $session['login']
                   );
-    $this->load->view('header/header_s',$resultat);
+    if(!$this->session->userdata("email")){ 
+      
+      $this->load->view('header/header_s',$resultat);
+    }
+    else{
+      $this->load->view('header/header_c',$resultat);
+    }
     $this->load->view('container/container_detalle',$resultat);
     $this->load->view('footer/footer_s');
 

@@ -22,7 +22,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url("assets/bootstrap/js/jquery-1.9.1.min.js");?>"></script>
     <script src="<?php echo base_url("assets/bootstrap/js/bootstrap.min.js"); ?>"></script>
     <script src="<?php echo base_url("assets/menu.js"); ?>"></script>
+    <script src="<?php echo base_url("assets/jshash-2.2/md5.js"); ?>"></script>
 	<title>Technocomputer</title>
+	<script type="text/javascript">
+		function calcMD5jj(){
+			var input_pass = document.getElementById("password");
+			input_pass.value = hex_md5(input_pass.value)
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function calcMD5(){
+			//alert(2111);
+			var input_pass = document.getElementById("password");
+			input_pass.value = hex_md5(input_pass.value);
+			document.getElementById("pass2").value=hex_md5(input_pass.value);
+			alert(document.getElementById("pass2").value);
+			
+			
+		}
+</script>
   </head>
 <body>
     <div class="jumbotron">
@@ -71,26 +90,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		            <button id="enviar" value="Buscar" name="enviar" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 		        </form>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#"><span class="glyphicon glyphicon-user"></span> Inici Sessio</a>
-					<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
-                       <li>
-                          <div class="row">
-                             <div class="col-md-12">   
-								 <form class="form" role="form" method="post" action="<?php echo site_url("welcome/login");?>">
+					<li class="dropdown">
+					  <a href="#"><span class="glyphicon glyphicon-user"></span> Inici Sessio</a>
+					  <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                        <li>
+                           <div class="row">
+                              <div class="col-md-12">
+                                 
+								 <form class="form" role="form" method="POST" action="<?php echo site_url("welcome/login");?>">
                                     <div class="input-group">
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									   <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email" required> 
+									   <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email" required/> 
                                     </div>
                                     <div class="input-group">
                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									   <input id="password" type="password" class="form-control" name="password" value="" placeholder="Password" required>
+									    <input id="password" type="password" class="form-control" name="password" value="" placeholder="" required/> 
                                     </div>
                                     <div class="form-group">
-                                       <button id="enviar"  type="submit" class="btn btn-primary btn-block btn_login"  onclick="cifrar()">Login</button>
+                                      <button id="enviar" type="submit"  class="btn btn-primary btn-block btn_login" onclick="calcMD5()">Login</button>
                                     </div>
                                  </form>
-								 <div class="regis">
+								  <div class="regis">
                                        <a class="regis" href="<?php echo site_url("welcome/registro");?>" >Registrate</a>
                                  </div>
                               </div>
@@ -99,7 +119,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</ul>
 					  
 					</li>
-					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cistella</a></li>
+					<li><a href="<?php echo site_url("welcome/cesta_resumen");?>"><span class="glyphicon glyphicon-shopping-cart"></span> Cistella</a></li>
 			</ul>		
 			   
 			</div>

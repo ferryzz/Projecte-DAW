@@ -355,8 +355,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                            <div class="row">
                               <div class="col-md-12">
                                  <div class="col-lg-8">
-                                       <p><a href="#"> Editar datos</a></p>
-									   <p><a href="#">Ver pedidos</a></p>
+                                 	<?php if ($id!=500) {
+                                 		echo "<p><a href='#''> Editar datos</a></p>
+									   <p><a href='". site_url("welcome/mispedidos")."''>Ver pedidos</a></p>";
+                                 	}elseif ($id==500) {
+                                 		echo "<p><a href=".site_url("welcome/eliminar")."> Eliminar Usuarios</a></p>
+									   <p><a href='". site_url("welcome/completar")."''>Modificar Pedidos</a></p>";
+                                 	}
+                                 	?>
+                                       
 									   <a href="<?php echo site_url("welcome/logout");?>" class="btn btn-danger btn-block">Tancar Sessió</a>
                                     </div>
                               </div>
@@ -365,7 +372,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</ul>
 					  
 					</li>
-					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cistella</a></li>
+					<li><a href="<?php echo site_url("welcome/cesta_resumen");?>"><span class="glyphicon glyphicon-shopping-cart"></span> Cistella</a></li>
 			</ul>		
 			   
 			</div>
