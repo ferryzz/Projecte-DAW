@@ -20,6 +20,10 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+      /**
+    * Mètode que enseña la pantalla principal cargant les vistes que s'especifiquen
+    * @author Ferran
+    */
 		$this->load->helper("url");
     $this->load->helper("form");
 		
@@ -99,6 +103,10 @@ class Welcome extends CI_Controller {
 	
 	public function quisom()
 	{
+      /**
+    * Mètode que mostra la pagina de quisom
+    * @author Julio
+    */
 		$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_quisom');
@@ -107,6 +115,10 @@ class Welcome extends CI_Controller {
 	
 	public function garantia()
 	{
+    /**
+    * Mètode que mostra la pagina de garantia
+    * @author Julio
+    */
 		$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_garantia');
@@ -114,6 +126,10 @@ class Welcome extends CI_Controller {
 	}
 	public function lugar()
 	{
+    /**
+    * Mètode que mostra la pagina de lloc
+    * @author Julio
+    */
 		$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_lugar');
@@ -121,6 +137,10 @@ class Welcome extends CI_Controller {
 	}
 	public function aviso()
 	{
+    /**
+    * Mètode que mostra la pagina d'avis
+    * @author Julio
+    */
 		$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_aviso');
@@ -137,6 +157,10 @@ class Welcome extends CI_Controller {
 	
 	public function privacidad()
 	{
+      /**
+    * Mètode que mostra la pagina de privacitat
+    * @author Julio
+    */
 		$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_privacidad');
@@ -144,6 +168,10 @@ class Welcome extends CI_Controller {
 	}
 	public function envio()
 	{
+      /**
+    * Mètode que mostra la pagina d'envio
+    * @author Julio
+    */
 		$this->load->helper("url");
 		$this->load->view('header/header_s');
 		$this->load->view('container/container_envio');
@@ -239,22 +267,24 @@ class Welcome extends CI_Controller {
     * @author Sergi
     */
     	$this->load->model("ValidarUsuariModel");
+      $this->load->model("ProductesModel");
     	$this->load->helper("url");
       	$session = $this->session->userdata();
-      	//$session["login"]=1;
+      	$session["login"]=1;
       	$this->session->set_userdata($session);
+        $data = array(
+        'usuari' => $this->ValidarUsuariModel->getUsuari($session),
+        'familias' => $this->ProductesModel->MostrarFamilias(),
+        'categorias' => $this->ProductesModel->llista_cat()
+        );
       	if (!isset($session["login"]) or $session["login"]==0){
-      		$this->load->view('header/header_s');
+      		//$this->load->view('header/header_s',$data);
       		$this->load->view('validar/no_validat');
       		$this->load->view('footer/footer_s'); 
       	}else{
-      		$data = array(
-				'usuari' => $this->ValidarUsuariModel->getUsuari($session)
-
-			);
-			$this->load->view('header/header_s');
-			$this->load->view('validar/validat',$data);
-			$this->load->view('footer/footer_s'); 
+      		$this->load->view('header/header_s',$data);
+          $this->load->view('validar/validat',$data);
+          $this->load->view('footer/footer_s'); 
       	}
       
     }
@@ -265,8 +295,13 @@ class Welcome extends CI_Controller {
     * Mètode que carrega la pestanya per escollir el pagament
     * @author Sergi
     */
-    	$this->load->helper("url");
-		$this->load->view('header/header_s');
+    $this->load->helper("url");
+    $this->load->model("ProductesModel");
+    $data = array(
+        'familias' => $this->ProductesModel->MostrarFamilias(),
+        'categorias' => $this->ProductesModel->llista_cat()
+        );
+		$this->load->view('header/header_s',$data);
 		$this->load->view('pago/prepago');
 		$this->load->view('footer/footer_s'); 
      }
@@ -340,12 +375,16 @@ class Welcome extends CI_Controller {
      }
     public function verProductos()
       {
+        /**
+        * Mètode que mostra la cerca dels productes
+        * @author Ferran
+        */
         $this->load->helper("form");
         $this->load->helper("url");
         $this->load->library('form_validation');
-    $this->form_validation->set_rules('buscar', 'Buscar', 'trim|min_length[2]|max_length[20]|prep_for_form|encode_php_tags');
+    $this->form_validation->set_rules('buscar', 'Buscar', 'trim|min_length[2]|max_length[15]|prep_for_form|encode_php_tags');
     $this->form_validation->set_message('min_length', 'La longitud minima es de 2');
-    $this->form_validation->set_message('max_length', 'La longitud maxima es de 20');
+    $this->form_validation->set_message('max_length', 'La longitud maxima es de 15');
         if ($this->form_validation->run() == TRUE)
                 {
               $this->load->helper("url");
@@ -374,8 +413,12 @@ class Welcome extends CI_Controller {
         }
       }
 
-      public function ordenar_nombres($b)
+      public function ordenar_nombres()
       {
+      /**
+      * Mètode que envia les dades a la funcio que jo controlo
+      * @author Ferran
+      */  
         $this->load->helper("url");
         $this->load->helper("form");
         $this->load->model('ProductesModel');//carguem el model
@@ -409,6 +452,11 @@ class Welcome extends CI_Controller {
       }
 
       public function ordenar_llista_nom($search){
+        /**
+      * Mètode que ordena les dades de la funcio verProducto per ordre alfabetic
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $this->load->model('ProductesModel');//carguem el model
@@ -424,6 +472,11 @@ class Welcome extends CI_Controller {
 
 
       public function ordenar_llista_preu_asc($search){
+          /**
+      * Mètode que ordena les dades de la funcio verProducto per preu ascendent
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $this->load->model('ProductesModel');//carguem el model
@@ -439,6 +492,11 @@ class Welcome extends CI_Controller {
 
 
       public function ordenar_llista_preu_desc($search){
+          /**
+      * Mètode que ordena les dades de la funcio verProducto per preu descendent
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $this->load->model('ProductesModel');//carguem el model
@@ -451,6 +509,11 @@ class Welcome extends CI_Controller {
     $this->load->view('footer/footer_s');
       }
       public function filtro_cat($search){
+          /**
+      * Mètode que mostra de la cerca que has fet Fs els productes de la categoria desitjada 
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $this->load->model('ProductesModel');
@@ -467,6 +530,11 @@ class Welcome extends CI_Controller {
 
 
       public function ordenar_cat_precio_asc($search){
+          /**
+      * Mètode que ordena les dades de la funcio verProducto per preu ascendent y per categoria
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $id_cat = $this->uri->segment(5);
@@ -483,6 +551,11 @@ class Welcome extends CI_Controller {
 
 
       public function ordenar_cat_precio_desc($search){
+            /**
+      * Mètode que ordena les dades de la funcio verProducto per preu descendent y per categoria
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $id_cat = $this->uri->segment(5);
@@ -498,6 +571,11 @@ class Welcome extends CI_Controller {
       }
 
       public function ordenar_cat_nombre($search){
+            /**
+      * Mètode que ordena les dades de la funcio verProducto per ordre alfabetic y per categoria
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $id_cat = $this->uri->segment(5);
@@ -513,6 +591,11 @@ class Welcome extends CI_Controller {
       }
 
       public function llista_categorias($search){
+            /**
+      * Mètode que mostra les families i categories en la barra del header
+      * @param $search és el contingut del input de la cerca que esta en la URL
+      * @author Ferran
+      */
         $this->load->helper("url");
         $this->load->helper("form");
         $this->load->model('ProductesModel');//carguem el model
@@ -530,6 +613,10 @@ class Welcome extends CI_Controller {
   }
 
   public function detalle(){
+        /**
+      * Mètode que mostra el producte que has clickat totes les seves dades
+      * @author Ferran
+      */
     $this->load->helper("url");
         $this->load->helper("form");
         $productID = $this->uri->segment(3);
@@ -544,15 +631,6 @@ class Welcome extends CI_Controller {
     $this->load->view('footer/footer_s');
 
 
-  }
-
-  public function prova($productID){
-    $this->load->helper("url");
-        $this->load->helper("form");
-        $prova=$this->input->post('quantity');
-        echo "<script>alert(".$prova.")</script>";
-        echo "<script>alert(".$productID.")</script>";
-        echo "hola";
   }
 	
 }

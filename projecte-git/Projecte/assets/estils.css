@@ -3,14 +3,19 @@ body {
   font-family: 'Open Sans', 'sans-serif';
    
 }
+
+/* imagen producto en detalle */
 .imagen_producto img{
     max-height: 500px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
     display: block;
-
-
+}
+/* imagen en pantalla principal*/
+#principal{
+    height: 50%;
+    width: 70%;
 }
 
 .regis{

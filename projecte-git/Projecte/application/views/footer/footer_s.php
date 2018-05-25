@@ -1,7 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
+<?php
+/**
+    * Vista que mostra el footer amb tots els seus links.
+    * @author Julio
+    */
+?>
 
 <footer class="footer">
     <div class="container">

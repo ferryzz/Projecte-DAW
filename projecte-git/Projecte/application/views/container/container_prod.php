@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<?php
+/**
+    * Vista que mostra la pagina principal amb uns productes
+    * @author Julio
+    */
+?>
 
 <div class="index-content">
 

@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<?php
+/**
+    * Vista que mostra les dades del producte que has clickat.
+    * @author Ferran
+    */
+?>
  <div class="container">
         	<div class="row">
 				
@@ -49,29 +55,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         					</div>  
     				    </div>   
                 
-                <!-- De aqui -->
 				<div class="container-fluid">       
                     <div class="col-md-12 product-info">
                         <ul id="myTab" class="nav nav-tabs nav_tabs">   
                             <li class="active"><a href="#service-one" data-toggle="tab">Descripción</a></li>
-                            <li><a href="#service-two" data-toggle="tab">PRODUCT INFO</a></li>
-                            <li><a href="#service-three" data-toggle="tab">Review</a></li>
                         </ul>
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade in active" id="service-one"> 
                             <section class="container product-info"><p><?php echo $row->descripcion; ?></p></section>
                         </div>
-                    <div class="tab-pane fade" id="service-two">
-                        <section class="container">
-                        </section>
-                    </div>
-                    <div class="tab-pane fade" id="service-three">
-                         <iframe align="center" width="500" height="400" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>                             
-                    </div>
                 </div>
                 <hr>
-            </div></div><?php } ?> 
-                <!-- A aqui -->  
+            </div></div><?php } ?>  
                 		
             </div>
         </div>       

@@ -29,8 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 					<tbody>
 						<tr>
-							<td><?php echo "<a href='http://localhost/proj/index.php/producto/".$row->id."''>" .$row->nombre."</a>";?></td>
-							<td><?php echo"<a href='http://localhost/proj/index.php/welcome/borrarproducto/".$row->id."/1'><span class='glyphicon glyphicon-minus'>&nbsp &nbsp</span></a>"; echo $cantidades[$i]; $semitotal=$cantidades[$i]; echo"&nbsp &nbsp"; echo"<a href='http://localhost/proj/index.php/welcome/addproduct/".$row->id."/1'><span class='glyphicon glyphicon-plus'></span></a>";?></td>
+							<td><?php echo "<a href='http://localhost/projecte-git/Projecte/index.php/welcome/detalle/".$row->id."''>" .$row->nombre."</a>";?></td>
+							<td><?php echo"<a href='http://localhost/projecte-git/Projecte/index.php/welcome/borrarproducto/".$row->id."/1'><span class='glyphicon glyphicon-minus'>&nbsp &nbsp</span></a>"; echo $cantidades[$i]; $semitotal=$cantidades[$i]; echo"&nbsp &nbsp"; echo"<a href='http://localhost/projecte-git/Projecte/index.php/welcome/addproduct/".$row->id."/1'><span class='glyphicon glyphicon-plus'></span></a>";?></td>
 							<td><?php $disponible=Date('d/m/y', strtotime("+10 days"));  if ($row->stock < $cantidades[$i]) {
 								echo "Disponible a partir del ".$disponible." (*)";;
 							}else{ echo "Disponible";}  ?></td>
@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</tbody>
 									</table>
 				<h3>Total: <?php echo $total."€"; $_SESSION["total"]=$total; ?></h3>
-				<button type="button" class="btn btn-primary" onclick="location.href='http://localhost/proj/index.php/welcome/validar'">Confirmar Pedido</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='http://localhost/projecte-git/Projecte/index.php/welcome/validar'">Confirmar Pedido</button>
 				<?php }?>
 
 					

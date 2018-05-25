@@ -1,3 +1,13 @@
+<?php
+/**
+    * Vista que mostra el resultat de una cerca.
+    * Depenent de la URL que hi hagi actualment gracies al javascript actualitza uns element del html
+    * @author Ferran
+    */
+?>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <head>
 <script>
     $(document).ready(function(){

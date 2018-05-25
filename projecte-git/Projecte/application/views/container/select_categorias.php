@@ -1,4 +1,9 @@
-<body>
+<?php
+/**
+    * Vista que mostra per pantalla el tots els productes de una categoria especifica
+    * @author Ferran
+    */
+?>
 <?php 
 if (empty($resultat2)) {
   ?>

@@ -2,6 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
+<?php
+/**
+    * Vista que mostra les formes de pago.
+    * @author Julio
+    */
+?>
 <div class="index-content">
     <div class="container">
         <div class="row">

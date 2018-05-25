@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<?php
+/**
+    * Vista que mostra Qui som.
+    * @author Julio
+    */
+?>
 
 <div class="index-content">
     <div class="container">

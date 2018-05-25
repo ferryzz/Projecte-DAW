@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<?php
+/**
+    * Vista que mostra el header quan estas loguejat.
+    * @author Julio
+    */
+?>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>

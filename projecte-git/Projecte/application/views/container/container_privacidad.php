@@ -1,7 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
+<?php
+/**
+    * Vista que mostra les politiques de privacitat i condicions.
+    * @author Julio
+    */
+?>
 <div class="index-content">
     <div class="container">
         <div class="row">
