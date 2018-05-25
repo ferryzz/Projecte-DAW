@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <head>
 <?php
-header('Refresh: 5; URL=http://localhost/proj/index.php');
+header('Refresh: 5; '.site_url());
 
 ?>
 </head>

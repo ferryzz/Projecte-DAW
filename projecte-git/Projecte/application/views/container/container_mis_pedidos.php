@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<h4>Haz click en el pedido que desees visualizar</h4>
 					<ul>
 					<?php foreach ($pedidos->result() as $row){?>
-						<li><?php echo "<a href=http://localhost/proj/index.php/welcome/ver_pedido/".$row->id.">Pedido nº".$row->id." con fecha ".$row->fecha." ".$row->hora."</a>"  ?></li>
+						<li><?php echo "<a href=".site_url("/welcome/ver_pedido/").$row->id.">Pedido nº".$row->id." con fecha ".$row->fecha." ".$row->hora."</a>"  ?></li>
 					
 					<?php }?>
 					</ul> 

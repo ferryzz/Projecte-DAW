@@ -50,7 +50,7 @@ class Welcome extends CI_Controller {
         
     $this->load->helper("url");
 
-     if(!$this->session->userdata("email")){ 
+     if(!$this->session->userdata("login")){ 
       
       $this->load->view('header/header_s',$data);
     }
@@ -416,7 +416,7 @@ class Welcome extends CI_Controller {
     */
     $this->load->helper("url");
     $this->header();
-		$this->load->view('container/container_pago');
+		$this->load->view('pago/prepago');
 		$this->load->view('footer/footer_s'); 
      }
 
@@ -793,7 +793,7 @@ class Welcome extends CI_Controller {
         $resultat =  array('resultat2' => $this->ProductesModel->select_categoria($categoria),
                   'familias' => $this->ProductesModel->MostrarFamilias(),
                   'categorias' => $this->ProductesModel->llista_cat(),
-                  'id' => $session['login']
+                  'id' => $session['login']=0
                   );
        if(!$this->session->userdata("email")){ 
       
