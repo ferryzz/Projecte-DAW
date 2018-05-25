@@ -13,8 +13,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
          <div class="col-sm-12">
 			<h2 class="q2">FORMAS DE PAGO</h2>
-			<h3 class="q3">Transferencia o ingreso en cuenta</h3>
-			<p> Este método no conlleva coste adicional. Los productos seleccionados quedarán reservados a la espera de la recepción del pago. En el concepto deberás indicar el número de pedido. La mercancía saldrá de nuestras instalaciones una vez que el ingreso quede reflejado en nuestra cuenta y siempre teniendo en cuenta la disponibilidad de los artículos adquiridos. En caso de transferencia bancaria, el pago podrá demorar entre 24 y 72 horas. Si se trata de un ingreso en cuenta, el pago quedará reflejado al instante.
+			<h3 class="q3">Contrareembolso</h3>
+			<p> El pago se realizará cuando la agencia de transporte entrega el paquete al destinatario del mismo.
+				Con esta forma de pago el pedido es pasado a almacén nada mas realizar el pedido y enviado una vez se ha confirmado que los datos del pedido son correctos.</p>		 
+
+			<p>
+				Esta forma de pago tiene una comisión que cobra la agencia de transportes en concepto de seguro y manipulación de dinero. Esta comisión es del 2,5% sobre el total del reembolso, con un mínimo de 3 €.	 
+
+				Para evitar esta comisión que cobra el transportista se puede seleccionar la forma de pago Transferencia / Ingreso en cuenta.
+			</p>
+
+				 
+			<p>
+				Esta forma de pago está limitada para el territorio español (península).
 			</p>
 			
 			<h3 class="q3">Paypal</h3>

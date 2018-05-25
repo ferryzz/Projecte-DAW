@@ -106,9 +106,12 @@ class Welcome extends CI_Controller {
       /**
     * Mètode que mostra la pagina de quisom
     * @author Julio
-    */
+    */	
+      	$this->load->model("ProductesModel");
+      	$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
+                        'categorias' => $this->ProductesModel->llista_cat());
 		$this->load->helper("url");
-		$this->load->view('header/header_s');
+		$this->load->view('header/header_s',$data);
 		$this->load->view('container/container_quisom');
 		$this->load->view('footer/footer_s');
 	}
@@ -120,7 +123,10 @@ class Welcome extends CI_Controller {
     * @author Julio
     */
 		$this->load->helper("url");
-		$this->load->view('header/header_s');
+		$this->load->model("ProductesModel");
+		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
+                        'categorias' => $this->ProductesModel->llista_cat());
+		$this->load->view('header/header_s',$data);
 		$this->load->view('container/container_garantia');
 		$this->load->view('footer/footer_s');
 	}
@@ -131,7 +137,10 @@ class Welcome extends CI_Controller {
     * @author Julio
     */
 		$this->load->helper("url");
-		$this->load->view('header/header_s');
+		$this->load->model("ProductesModel");
+		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
+                        'categorias' => $this->ProductesModel->llista_cat());
+		$this->load->view('header/header_s',$data);
 		$this->load->view('container/container_lugar');
 		$this->load->view('footer/footer_s');
 	}
@@ -142,7 +151,10 @@ class Welcome extends CI_Controller {
     * @author Julio
     */
 		$this->load->helper("url");
-		$this->load->view('header/header_s');
+		$this->load->model("ProductesModel");
+		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
+                        'categorias' => $this->ProductesModel->llista_cat());
+		$this->load->view('header/header_s',$data);
 		$this->load->view('container/container_aviso');
 		$this->load->view('footer/footer_s');
 	}
@@ -162,7 +174,10 @@ class Welcome extends CI_Controller {
     * @author Julio
     */
 		$this->load->helper("url");
-		$this->load->view('header/header_s');
+		$this->load->model("ProductesModel");
+		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
+                        'categorias' => $this->ProductesModel->llista_cat());
+		$this->load->view('header/header_s',$data);
 		$this->load->view('container/container_privacidad');
 		$this->load->view('footer/footer_s');
 	}
@@ -173,7 +188,10 @@ class Welcome extends CI_Controller {
     * @author Julio
     */
 		$this->load->helper("url");
-		$this->load->view('header/header_s');
+		$this->load->model("ProductesModel");
+		$data = array('familias' => $this->ProductesModel->MostrarFamilias(),
+                        'categorias' => $this->ProductesModel->llista_cat());
+		$this->load->view('header/header_s',$data);
 		$this->load->view('container/container_envio');
 		$this->load->view('footer/footer_s');
 	}
@@ -302,7 +320,7 @@ class Welcome extends CI_Controller {
         'categorias' => $this->ProductesModel->llista_cat()
         );
 		$this->load->view('header/header_s',$data);
-		$this->load->view('pago/prepago');
+		$this->load->view('container/container_pago');
 		$this->load->view('footer/footer_s'); 
      }
 

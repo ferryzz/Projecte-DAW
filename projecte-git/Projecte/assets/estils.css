@@ -4,6 +4,10 @@ body {
    
 }
 
+/* imagen quisom logo*/
+#svg8{
+    margin-left: 350px;
+}
 /* imagen producto en detalle */
 .imagen_producto img{
     max-height: 500px;
